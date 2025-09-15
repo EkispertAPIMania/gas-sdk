@@ -1,10 +1,13 @@
 import type { StationJson } from "../type/station";
+import { GateGroup } from "./gate_group";
 
 export class Station {
   private code: string | undefined
   private name: string | undefined
-  private type: string | undefined
+  private oldName: string | undefined
+  private type: string | { text: string; detail: string } | undefined
   private yomi: string | undefined
+  private gateGroup: GateGroup | undefined
 
   constructor(data: StationJson) {
     this.sets(data);
@@ -24,11 +27,17 @@ export class Station {
       case "name":
         this.name = value;
         break;
+      case "oldname":
+        this.oldName = value;
+        break;
       case "type":
         this.type = value;
         break;
       case "yomi":
         this.yomi = value;
+        break;
+      case "gategroup":
+        this.gateGroup = new GateGroup(value);
         break;
       default:
         throw new Error(`Unknown key: ${key} in Station`);

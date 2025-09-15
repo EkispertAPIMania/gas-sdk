@@ -4,6 +4,11 @@ import type { StationJson } from "./station";
 
 export interface PointJson {
   Station: StationJson
-  Prefecture: PrefectureJson
-  GeoPoint: GeoPointJson
+  Prefecture?: PrefectureJson
+  GeoPoint?: GeoPointJson
+  index?: number
+  getOn?: boolean
+  getOff?: boolean
+  onRoute?: boolean
+  onRouteEdge?: boolean
 }

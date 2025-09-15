@@ -7,6 +7,11 @@ export class Point {
   private station: Station | undefined
   private prefecture: Prefecture | undefined
   private geoPoint: GeoPoint | undefined
+  private index: number | undefined
+  private getOn: boolean | undefined
+  private getOff: boolean | undefined
+  private onRoute: boolean | undefined
+  private onRouteEdge: boolean | undefined
 
   constructor(data: PointJson) {
     this.sets(data);
@@ -28,6 +33,21 @@ export class Point {
         break;
       case "geopoint":
         this.geoPoint = new GeoPoint(value);
+        break;
+      case "index":
+        this.index = value;
+        break;
+      case "geton":
+        this.getOn = value;
+        break;
+      case "getoff":
+        this.getOff = value;
+        break;
+      case "onroute":
+        this.onRoute = value;
+        break;
+      case "onrouteedge":
+        this.onRouteEdge = value;
         break;
       default:
         throw new Error(`Unknown key: ${key} in Point`);

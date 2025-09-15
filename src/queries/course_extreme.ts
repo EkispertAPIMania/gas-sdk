@@ -40,18 +40,6 @@ export default class CourseExtreme extends Base {
     this.gcs = 'tokyo';
   }
 
-  addArrayParams(params: Record<string, string | number>, key: string, array: string[]) {
-    if (array.length > 0) {
-      params[key] = array.join(':');
-    }
-  }
-
-  addBooleanParams(params: Record<string, string | number>, key: string, value: boolean | undefined) {
-    if (typeof value === 'boolean') {
-      params[key] = String(value);
-    }
-  }
-
   execute() {
     const params: Record<string, string | number> = {};
     this.addArrayParams(params, 'viaList', this.viaList);
@@ -92,5 +80,4 @@ export default class CourseExtreme extends Base {
     const res = super._execute<{ Course: CourseJson[] | CourseJson}>('/search/course/extreme', params);
     return (Array.isArray(res.Course) ? res.Course : [res.Course]).map(course => new Course(course));
   }
-
 }

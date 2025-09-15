@@ -9,7 +9,19 @@ export default class Base {
     this.client = client;
     this.format = 'json';
   }
-  
+
+  addArrayParams(params: Record<string, string | number>, key: string, array: string[]) {
+    if (array.length > 0) {
+      params[key] = array.join(':');
+    }
+  }
+
+  addBooleanParams(params: Record<string, string | number>, key: string, value: boolean | undefined) {
+    if (typeof value === 'boolean') {
+      params[key] = String(value);
+    }
+  }
+
   buildQuery(params: Record<string, string | number>) {
     const pairs = [];
     for (const key in params) {
