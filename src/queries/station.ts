@@ -64,8 +64,8 @@ export default class Station extends Base {
 
     return {
       points,
-      max: res.max,
-      offset: res.offset,
+      max: parseInt(`${res.max}`, 10),
+      offset: parseInt(`${res.offset}`, 10),
       roundTripType: res.RoundTripType
     };
   }

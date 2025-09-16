@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "esbuild src/index.ts --bundle --outfile=dist/index.js --format=iife --platform=browser --target=es2017",
-    "push": "npm run build && clasp push --force"
+    "push": "npm run build && clasp push --force --watch",
+    "watch": "esbuild src/index.ts --bundle --outfile=dist/index.js --format=iife --platform=browser --target=es2017 --watch"
   },
   "keywords": [],
   "author": "",
