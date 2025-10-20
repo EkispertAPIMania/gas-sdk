@@ -66,6 +66,26 @@ const points = query.execute();
 points.forEach(point => console.log(point.station.name));
 ```
 
+## 平均待ち時間探索
+
+平均待ち時間探索のみの経路探索を行います。検索条件、結果は[平均待ち時間探索 \- 駅すぱあと API（旧：駅すぱあとWebサービス） Documents 駅データ・経路検索のWebAPI](https://docs.ekispert.com/v1/api/search/course/plain.html)を参照してください。
+
+```js
+const query = client.coursePlainQuery();
+query.from = 25077
+query.to = 29090
+const courses = query.execute();
+console.log(courses[0].searchType); // "plain"
+console.log(courses[0].prices[0].kind); // "ChargeSummary"
+console.log(courses[0].prices[0].oneway); // 2530
+console.log(courses[0].prices[0].round); // 5060
+console.log(courses[0].teiki.displayRoute); // "名古屋--ＪＲ東海道新幹線--新大阪--OsakaMetro御堂筋線--なんば(地下鉄)"
+console.log(courses[0].routes[0].timeOther); // 17
+console.log(courses[0].routes[0].exhaustCo2); // 3884
+console.log(courses[0].routes[0].points[0].station.name); // "名古屋"
+console.log(courses[0].routes[0].points[1].station.name); // "新大阪"
+```
+
 ## ライセンス
 
 MITライセンスです。

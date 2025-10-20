@@ -1,4 +1,5 @@
 import type { PriceJson } from "../type/price"
+import { Rate } from "./rate";
 
 export class Price {
   private fareRevisionStatus: string | undefined
@@ -14,6 +15,7 @@ export class Price {
   private passClassIndex: string | undefined
   private name: string | undefined
   private vehicleIndex: string | undefined
+  private rate: Rate | undefined
 
   constructor(data: PriceJson) {
     this.sets(data);
@@ -65,6 +67,9 @@ export class Price {
         break;
       case "vehicleindex":
         this.vehicleIndex = value;
+        break;
+      case "rate":
+        this.rate = new Rate(value);
         break;
       default:
         throw new Error(`Unknown key: ${key} in Price`);

@@ -1,6 +1,7 @@
 import CourseExtreme from "./queries/course_extreme.js";
 import Station from "./queries/station.js";
 import StationLight from "./queries/station_light.js";
+import CoursePlain from "./queries/course_plain.js";
 
 export class Client {
   readonly apiKey: string;
@@ -30,6 +31,13 @@ export class Client {
    */
   stationLightQuery() {
     return new StationLight(this);
+  }
+
+  /**
+   * 
+   */
+  coursePlainQuery() {
+    return new CoursePlain(this);
   }
 }
 
