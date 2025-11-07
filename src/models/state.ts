@@ -4,6 +4,8 @@ import { Datetime } from "./datetime"
 export class State {
   private type: string | undefined
   private datetime: Datetime | undefined
+  private no: string | undefined
+  private isStarting: boolean | undefined
 
   constructor(data: StateJson) {
     this.sets(data);
@@ -22,6 +24,12 @@ export class State {
         break;
       case "datetime":
         this.datetime = new Datetime(value);
+        break;
+      case "no":
+        this.no = value;
+        break;
+      case "isstarting":
+        this.isStarting = value;
         break;
       default:
         throw new Error(`Unknown key: ${key} in State`);

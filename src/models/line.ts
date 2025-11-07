@@ -23,6 +23,11 @@ export class Line {
   private lineSymbol: LineSymbol | undefined
   private color: string | undefined
   private chargeIndex: string | undefined
+  private track: string | undefined
+  private cars: string | undefined
+  private trainId: string | undefined
+  private destination: string | undefined
+  private number: string | undefined
 
   constructor(data: LineJson) {
     this.sets(data);
@@ -95,6 +100,21 @@ export class Line {
         break;
       case "chargeindex":
         this.chargeIndex = value;
+        break;
+      case "track":
+        this.track = value;
+        break;
+      case "cars":
+        this.cars = value;
+        break;
+      case "trainid":
+        this.trainId = value;
+        break;
+      case "destination":
+        this.destination = value;
+        break;
+      case "number":
+        this.number = value;
         break;
       default:
         throw new Error(`Unknown key: ${key} in Line`);
