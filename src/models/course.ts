@@ -3,7 +3,7 @@ import { PassStatus } from "./pass_status";
 import { Price } from "./price";
 import { Route } from "./route";
 import { Teiki } from "./teiki";
-
+import { AssignStatus } from "./assign_status";
 
 export class Course {
   private searchType: string | undefined;
@@ -13,6 +13,7 @@ export class Course {
   private teiki: Teiki | undefined;
   private routes: Route[] = [];
   private passStatuses: PassStatus[] = [];
+  private assignStatus: AssignStatus | undefined;
 
   constructor(data: CourseJson) {
     this.sets(data);
@@ -48,6 +49,9 @@ export class Course {
         break;
       case "passstatus":
         this.passStatuses = (Array.isArray(value) ? value : [value]).map(item => new PassStatus(item));
+        break;
+      case "assignstatus":
+        this.assignStatus = new AssignStatus(value);
         break;
       default:
         throw new Error(`Unknown key: ${key} in Course`);

@@ -36,7 +36,7 @@ export default class Base {
     params['key'] = this.client.apiKey;
     // Implementation of the execute method
     const url = `${this.client.baseUrl}/v1/json${path}?${this.buildQuery(params)}`;
-    // console.log({ url });
+    console.log({ url });
     const res = UrlFetchApp.fetch(url, {
       method: 'get',
       muteHttpExceptions: true,

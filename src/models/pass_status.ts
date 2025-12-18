@@ -10,6 +10,7 @@ export class PassStatus {
   private teiki1Index: string | undefined;
   private name: string | undefined;
   private type: string | undefined;
+  private comment: string | undefined;
 
   constructor(data: PassStatusJson) {
     this.sets(data);
@@ -49,6 +50,9 @@ export class PassStatus {
         break;
       case "type":
         this.type = value;
+        break;
+      case "comment":
+        this.comment = value;
         break;
       default:
         throw new Error(`Unknown key: ${key} in PassStatus`);

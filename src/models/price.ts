@@ -15,6 +15,9 @@ export class Price {
   private passClassIndex: string | undefined
   private name: string | undefined
   private vehicleIndex: string | undefined
+  private nikukanteikiIndex: string | undefined
+  private offpeakTeiki: string | undefined
+  private relationIndex: string | undefined
   private rate: Rate | undefined
 
   constructor(data: PriceJson) {
@@ -61,6 +64,15 @@ export class Price {
         break;
       case "passclassindex":
         this.passClassIndex = value;
+        break;
+      case "nikukanteikiindex":
+        this.nikukanteikiIndex = value;
+        break;
+      case "offpeakteiki":
+        this.offpeakTeiki = value;
+        break;
+      case "relationindex":
+        this.relationIndex = value;
         break;
       case "name":
         this.name = value;
