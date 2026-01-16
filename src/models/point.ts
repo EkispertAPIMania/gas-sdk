@@ -2,6 +2,7 @@ import type { PointJson } from "../type/point"
 import { GeoPoint } from "./geo_point"
 import { Prefecture } from "./prefecture"
 import { Station } from "./station"
+import { Cost } from "./cost"
 
 export class Point {
   private station: Station | undefined
@@ -11,6 +12,8 @@ export class Point {
   private getOff: boolean | undefined
   private onRoute: boolean | undefined
   private onRouteEdge: boolean | undefined
+  private distance: string | undefined
+  private cost: Cost | undefined
 
   constructor(data: PointJson) {
     this.sets(data);
@@ -44,6 +47,12 @@ export class Point {
         break;
       case "onrouteedge":
         this.onRouteEdge = value === 'True' ? true : false;
+        break;
+      case "distance":
+        this.distance = value;
+        break;
+      case "cost":
+        this.cost = new Cost(value);
         break;
       default:
         throw new Error(`Unknown key: ${key} in Point`);

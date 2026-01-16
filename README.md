@@ -86,6 +86,75 @@ console.log(courses[0].routes[0].points[0].station.name); // "名古屋"
 console.log(courses[0].routes[0].points[1].station.name); // "新大阪"
 ```
 
+## 緯度経度からの周辺駅検索
+
+緯度経度からの周辺駅検索を実行します。検索条件、結果は[緯度経度からの周辺駅検索 \- 駅すぱあと API（旧：駅すぱあとWebサービス） Documents 駅データ・経路検索のWebAPI](https://docs.ekispert.com/v1/api/geo/station.html)を参照してください。
+
+```javascript
+const query = client.geoStationQuery();
+
+// 緯度経度の設定
+query.setGeoPoint({ latitude: "35.6783055555556", longitude: "139.770441666667", radius: 1000, gcs: 'tokyo'})
+// コミュニティバスの指定
+query.communityBus = 'except';
+try {
+  const points = query.execute();
+  console.log(points.length); // 79
+  console.log(points[0].station.name); // 東京
+  console.log(points[0].prefecture.name); // 東京都
+  console.log(points[0].prefecture.code); // 13
+  console.log(points[0].distance); // 24
+  console.log(points[1].station.name); // 東京駅前(高速・連絡バス)
+} catch (e) {
+  console.error(e.code);
+  console.error(e.message);
+}
+```
+
+## 定期券の払い戻し計算
+
+定期券の払い戻し計算を行います。検索条件、結果は[定期券の払い戻し計算 \- 駅すぱあと API（旧：駅すぱあとWebサービス） Documents 駅データ・経路検索のWebAPI](https://docs.ekispert.com/v1/api/course/repayment.html)を参照してください。
+
+```javascript
+const query = client.coursePlainQuery();
+query.from = '高円寺';
+query.to = '東京';
+query.date = new Date();
+const results = query.execute();
+
+const query2 = client.courseRepaymentQuery();
+query2.checkEngineVersion = false;
+query2.serializeData = results[0].serializeData;
+query2.separator = ['1', 'true'];
+const results2 = query2.execute();
+
+console.log(results2.repaymentList.repaymentTickets.length); // 1
+console.log(results2.repaymentList.startDate); // Thu Jan 15 2026 09:00:00 GMT+0900 (Japan Standard Time)
+console.log(results2.repaymentList.validityPeriod); // 6
+console.log(results2.repaymentList.repaymentTickets[0].feePriceValue); // 220
+console.log(results2.teikiRoute.teikiRouteSections[0].points[0].prefecture.name); // 東京都
+console.log(results2.teikiRoute.teikiRouteSections[0].points[0].station.name); // 高円寺
+```
+
+## N分以内で行ける駅を検索
+
+N分以内で行ける駅を検索します。検索条件、結果は[範囲探索 \- 駅すぱあと API（旧：駅すぱあとWebサービス） Documents 駅データ・経路検索のWebAPI](https://docs.ekispert.com/v1/api/search/multipleRange.html)を参照してください。
+
+```javascript
+const query = client.multipleRangeQuery();
+
+// 探索条件の設定
+query.baseList = ["有楽町"];
+query.upperMinute = [15];
+
+const response = query.execute();
+console.log(response.points.length); // 42
+console.log(response.points[0].station.name); // 日比谷
+console.log(response.points[0].prefecture.name); // 東京都
+console.log(response.points[0].prefecture.code); // 13
+```
+
+
 ## ライセンス
 
 MITライセンスです。

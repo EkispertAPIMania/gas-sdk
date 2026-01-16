@@ -5,3 +5,10 @@ export interface GeoPointJson {
   gcs: string
   lati_d: string
 }
+
+export interface GeoPointParams {
+  latitude: number
+  longitude: number
+  gcs?: string
+  radius?: number
+}

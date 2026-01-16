@@ -45,7 +45,6 @@ export default class CoursePlain extends Base {
       Course: CourseJson[] | CourseJson;
     }>('/search/course/plain', params);
     const courses: Course[] = [];
-    console.log({ res });
     if (res.Course) {
       const courseArray = Array.isArray(res.Course) ? res.Course : [res.Course];
       courseArray.forEach(course => courses.push(new Course(course)));
